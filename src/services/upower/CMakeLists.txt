@@ -1,38 +1,44 @@
-set_source_files_properties(org.freedesktop.UPower.xml PROPERTIES
-	CLASSNAME DBusUPowerService
-	NO_NAMESPACE TRUE
-)
+set_source_files_properties(
+  org.freedesktop.UPower.xml PROPERTIES CLASSNAME DBusUPowerService NO_NAMESPACE
+                                                                    TRUE)
 
-qt_add_dbus_interface(DBUS_INTERFACES
-	org.freedesktop.UPower.xml
-	dbus_service
-)
+qt_add_dbus_interface(DBUS_INTERFACES org.freedesktop.UPower.xml dbus_service)
 
-set_source_files_properties(org.freedesktop.UPower.Device.xml PROPERTIES
-	CLASSNAME DBusUPowerDevice
-	NO_NAMESPACE TRUE
-)
+set_source_files_properties(
+  org.freedesktop.UPower.Device.xml PROPERTIES CLASSNAME DBusUPowerDevice
+                                               NO_NAMESPACE TRUE)
 
-qt_add_dbus_interface(DBUS_INTERFACES
-	org.freedesktop.UPower.Device.xml
-	dbus_device
-)
+qt_add_dbus_interface(DBUS_INTERFACES org.freedesktop.UPower.Device.xml
+                      dbus_device)
 
-qt_add_library(quickshell-service-upower STATIC
-	core.cpp
-	device.cpp
-	powerprofiles.cpp
-	${DBUS_INTERFACES}
-)
+set_source_files_properties(
+  org.freedesktop.UPower.KbdBacklight.xml
+  PROPERTIES CLASSNAME DBusUPowerXkbBacklight NO_NAMESPACE TRUE)
+
+qt_add_dbus_interface(DBUS_INTERFACES org.freedesktop.UPower.KbdBacklight.xml
+                      dbus_kbd_backlight)
+
+qt_add_library(
+  quickshell-service-upower
+  STATIC
+  core.cpp
+  device.cpp
+  kbd_backlight.cpp
+  powerprofiles.cpp
+  ${DBUS_INTERFACES})
 
 # dbus headers
-target_include_directories(quickshell-service-upower PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(quickshell-service-upower
+                           PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
-qt_add_qml_module(quickshell-service-upower
-	URI Quickshell.Services.UPower
-  VERSION 0.1
-	DEPENDENCIES QtQml
-)
+qt_add_qml_module(
+  quickshell-service-upower
+  URI
+  Quickshell.Services.UPower
+  VERSION
+  0.1
+  DEPENDENCIES
+  QtQml)
 
 qs_add_module_deps_light(quickshell-service-upower Quickshell)
 

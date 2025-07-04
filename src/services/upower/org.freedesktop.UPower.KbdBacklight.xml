@@ -1,0 +1,21 @@
+<node>
+	<interface name="org.freedesktop.UPower.KbdBacklight">
+		<method name="GetMaxBrightness">
+			<arg direction="out" type="i" name="value" />
+		</method>
+		<method name="GetBrightness">
+			<arg direction="out" type="i" name="value" />
+		</method>
+		<method name="SetBrightness">
+			<arg direction="in" type="i" name="value" />
+		</method>
+
+		<signal name="BrightnessChanged">
+			<arg direction="out" type="i" name="value" />
+		</signal>
+		<signal name="BrightnessChangedWithSource">
+			<arg direction="out" type="i" name="value" />
+			<arg direction="out" type="s" name="source" />
+		</signal>
+	</interface>
+</node>

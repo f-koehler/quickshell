@@ -158,6 +158,8 @@ UPowerDevice* UPower::displayDevice() { return &this->mDisplayDevice; }
 
 ObjectModel<UPowerDevice>* UPower::devices() { return &this->readyDevices; }
 
+UPowerKbdBacklight* UPower::keyboardBacklight() { return &this->mKeyboardBacklight; }
+
 UPower* UPower::instance() {
 	static UPower* instance = new UPower(); // NOLINT
 	return instance;

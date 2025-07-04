@@ -13,6 +13,7 @@
 #include "../../dbus/properties.hpp"
 #include "dbus_service.h"
 #include "device.hpp"
+#include "kbd_backlight.hpp"
 
 namespace qs::service::upower {
 
@@ -23,6 +24,7 @@ public:
 	[[nodiscard]] UPowerDevice* displayDevice();
 	[[nodiscard]] ObjectModel<UPowerDevice>* devices();
 	[[nodiscard]] QBindable<bool> bindableOnBattery() const { return &this->bOnBattery; };
+	[[nodiscard]] UPowerKbdBacklight* keyboardBacklight();
 
 	static UPower* instance();
 
@@ -45,6 +47,7 @@ private:
 	UPowerDevice mDisplayDevice {this};
 	QHash<QString, UPowerDevice*> mDevices;
 	ObjectModel<UPowerDevice> readyDevices {this};
+	UPowerKbdBacklight mKeyboardBacklight {this};
 
 	Q_OBJECT_BINDABLE_PROPERTY(UPower, bool, bOnBattery, &UPower::onBatteryChanged);
 
